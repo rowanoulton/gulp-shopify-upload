@@ -100,7 +100,7 @@ shopify._makePathRelative = function(filepath, base) {
  * @param {Function} done
  */
 shopify.upload = function(filepath, file, host, base, themeid) {
-    gutil.log('Detected change to: ' + path.basename(filepath));
+    gutil.log(chalk.white('Detected change to: ' + chalk.green(path.basename(filepath))));
 
     var api = shopifyAPI,
         themeId = themeid,
@@ -123,12 +123,12 @@ shopify.upload = function(filepath, file, host, base, themeid) {
 
     function onUpdate(err, resp) {
         if (err && err.type === 'ShopifyInvalidRequestError') {
-            gutil.log('Error invalid upload request! ' + filepath + ' not uploaded to ' + host);
+            gutil.log(chalk.red('Error invalid upload request! ' + filepath + ' not uploaded to ' + host));
         } else if (!err) {
             var filename = filepath.replace(/^.*[\\\/]/, '');
-            gutil.log('Upload Complete: ' + filename);
+            gutil.log(chalk.green('Upload Complete: ' + filename));
         } else {
-          gutil.log('Error undefined! ' + err.type);
+          gutil.log(chalk.red('Error undefined! ' + err.type));
         }
     }
 
@@ -145,7 +145,7 @@ function gulpShopifyUpload(apiKey, password, host, themeid) {
 
   // Set up the API
   shopifyAPI = shopify._getApi(apiKey, password, host);
-  gutil.log('Ready to upload to ' + host);
+  gutil.log(chalk.yellow('Ready to upload to ' + host));
 
   if(typeof apiKey === 'undefined'){
     throw new PluginError(PLUGIN_NAME, 'Error, API Key for shopify does not exist!');
