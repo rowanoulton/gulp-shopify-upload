@@ -5,6 +5,7 @@ var async = require('async');
 var isBinaryFile = require('isbinaryfile');
 var ShopifyApi = require('shopify-api');
 var PluginError = gutil.PluginError;
+var chalk = require('chalk');
 
 // Set up shopify API information
 var shopify = {};
