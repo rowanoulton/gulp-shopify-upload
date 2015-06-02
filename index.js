@@ -99,6 +99,7 @@ shopify._makePathRelative = function(filepath, base) {
  * @param {Function} done
  */
 shopify.upload = function(filepath, file, host, base, themeid) {
+    gutil.log('Detected change to: ' + path.basename(filepath));
 
     var api = shopifyAPI,
         themeId = themeid,
